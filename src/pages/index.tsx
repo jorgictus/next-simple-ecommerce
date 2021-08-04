@@ -1,82 +1,78 @@
-import Head from 'next/head'
+import Heading from '../components/Heading'
+import Header from '../components/Header'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+type CardProps = {
+  href: string
+  imgSrc: string
+  layoutId: string
+  title: string
+}
+const Card = ({ href, imgSrc, layoutId, title }: CardProps) => {
+  return (
+    <Link href={href}>
+      <motion.div
+        className="relative py-3 rounded-xl hover:bg-gray-700 hover:text-white cursor-pointer transition"
+        whileHover={{
+          scale: 1.1,
+          transition: {
+            delayChildren: 0.5,
+            staggerChildren: 0.5
+          }
+        }}
+        initial={{ scale: 1 }}
+      >
+        <motion.img src={imgSrc} layoutId={layoutId} />
+
+        <motion.div className="flex flex-col justify-center items-center w-full ">
+          <p className="text-xl">Bike name</p>
+          <p className="text-2xl font-extrabold">R$ 99.00</p>
+        </motion.div>
+      </motion.div>
+    </Link>
+  )
+}
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      delayChildren: 0.5,
+      staggerChildren: 0.5
+    }
+  }
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <>
+      <div className="absolute h-screen w-1/2 -ml-20 bg-blue-500"></div>
+      <div className="relative">
+        <Header />
+        <div className="p-12 ">
+          <Heading color="text-white" weight="font-bold">
+            I&apos;m looking for a bike
+          </Heading>
+          <div className="text-md w-96 mt-4 text-white">
+            The range of Gigant on road e-bikes swells from one offering in 2018
+            for 2019
+          </div>
+          <div className="text-md w-96 mt-4 text-white">SHOP THIS MODEL</div>
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
+        <div className="flex mx-10 items-center">
+          <motion.div
+            className="w-full grid grid-cols-1 grid-rows-3 gap-4 mt-10 md:grid-cols-4 md:grid-rows-1 "
+            transition={{
+              delay: 2
+            }}
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+          ></motion.div>
+        </div>
+      </div>
+    </>
   )
 }
